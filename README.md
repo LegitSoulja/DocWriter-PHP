@@ -26,7 +26,7 @@ $innerHTML = "YAY, I am orange";
 */
 $element = \DocWriter\DocWriter::createTag("div", array("class"=>"container"));
 
-// You can add a child DocElement, as innerHTML for a element, for example.
+// You can add a child DocElement, as innerHTML for an element, for example.
 $element->addChild(\DocWriter\DocWriter::createTag("h2",array("style"=>"color:red"),"Hey"));
 
 // Dynamically add a attribute
