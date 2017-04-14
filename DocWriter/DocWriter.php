@@ -22,6 +22,9 @@ class DocElement
         $this->attributes = $b;
         $this->innerHTML  = $c;
     }
+    function __toString(){
+        return $this->toHTML();
+    }
     function toHTML()
     {
         $attributes = $this->renderAttributes();
