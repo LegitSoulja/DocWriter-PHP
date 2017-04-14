@@ -11,7 +11,7 @@ Something weird, maybe useful. Who knows.
 * @param attributes | The tag attributes
 * @innerHTML | The tag inner HTML content
 */
-\DocWriter\DocWriter::createTag($tagName, $attributes(array), $innerHTML) // returns DocElement object
+\DocWriter\DocWriter::createTag($tagName, (array)$attributes, $innerHTML) // returns DocElement object
 
 ```
 
