@@ -11,6 +11,9 @@ Something weird, maybe useful. Who knows.
 * @param attributes | The tag attributes
 * @innerHTML | The tag inner HTML content
 */
+$tagName = "article";
+$attributes = array("style"=>"color:orange");
+$innerHTML = "YAY, I am orange";
 \DocWriter\DocWriter::createTag($tagName, (array)$attributes, $innerHTML) // returns DocElement object
 
 ```
