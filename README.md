@@ -13,7 +13,7 @@ Something weird, maybe useful. Who knows.
 */
 $tagName = "article";
 $attributes = array("style"=>"color:orange");
-$innerHTML = "YAY, I am orange";
+$innerHTML = "YAY, I'm an orange colored element.";
 \DocWriter\DocWriter::createTag($tagName, (array)$attributes, $innerHTML) // returns DocElement object
 
 ```
@@ -29,10 +29,10 @@ $element = \DocWriter\DocWriter::createTag("div", array("class"=>"container"));
 // You can add a child DocElement, as innerHTML for an element, for example.
 $element->addChild(\DocWriter\DocWriter::createTag("h2",array("style"=>"color:red"),"Hey"));
 
-// Dynamically add a attribute
+// Dynamically add an attribute.
 $element->attr("class","hey_text");
 
-// Finally, output results
+// Finally, output results.
 echo $element->toHTML();
 
 /*
