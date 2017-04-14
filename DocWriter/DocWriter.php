@@ -4,7 +4,7 @@ namespace Document;
 
 class DocWriter
 {
-    static function createTag($tagname, $attributes, $innerHTML = null)
+    static function createTag($tagname, $attributes = array(), $innerHTML = null)
     {
         return new \OA\Core\Library\DocElement($tagname, $attributes, $innerHTML);
     }
@@ -16,7 +16,7 @@ class DocElement
     private $attributes;
     private $innerHTML;
     private $elements = array();
-    function __construct($a, $b, $c = null)
+    function __construct($a, $b = array(), $c = null)
     {
         $this->tagname    = $a;
         $this->attributes = $b;
