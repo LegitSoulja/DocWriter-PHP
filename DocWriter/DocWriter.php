@@ -6,7 +6,7 @@ class DocWriter
 {
     static function createTag($tagname, $attributes = array(), $innerHTML = null)
     {
-        return new \OA\Core\Library\DocElement($tagname, $attributes, $innerHTML);
+        return new Document\DocElement($tagname, $attributes, $innerHTML);
     }
 }
 
@@ -40,13 +40,13 @@ HTML;
     {
         if (strtolower(gettype($a) == "array")) {
             foreach ($a as $b) {
-                if (!($b instanceof \OA\Core\Library\DocElement))
+                if (!($b instanceof Document\DocElement))
                     continue;
                 array_push($this->elements, $b);
             }
             return;
         }
-        if (!($a instanceof \OA\Core\Library\DocElement))
+        if (!($a instanceof Document\DocElement))
             die("Unknown type.");
         array_push($this->elements, $a);
     }
