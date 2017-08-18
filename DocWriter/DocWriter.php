@@ -35,7 +35,7 @@ class DocElement
         return $this->toHTML();
     }
     
-    function toHTML()
+    function toHTML($output = false)
     {
         $attributes = $this->renderAttributes();
         $html       = $this->innerHTML;
@@ -49,7 +49,8 @@ class DocElement
             ), 'utf8');
             $tidy->cleanRepair();
         }
-        return (isset($tidy) ? tidy_get_output($tidy) : $render);
+        if(!$output) return (isset($tidy) ? tidy_get_output($tidy) : $render);
+        echo (isset($tidy) ? tidy_get_output($tidy) : $render);
     }
     
     function addChild($a)
