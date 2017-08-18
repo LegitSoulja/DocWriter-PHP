@@ -46,23 +46,16 @@ class DocElement
         $html .= $this->renderElements();
         $tagname = $this->tagname;
         $render  = "<{$tagname}{$attributes}>{$html}</{$tagname}>" . PHP_EOL;
-        if (in_array("tidy", get_declared_classes())) {
-            $tidy = new \tidy();
-            $tidy->parseString($render, array(
-                "indent" => true
-            ), 'utf8');
-            $tidy->cleanRepair();
-        }
-        if(!$output) return (isset($tidy) ? tidy_get_output($tidy) : $render);
-        echo (isset($tidy) ? tidy_get_output($tidy) : $render);
+        if(!$output) return $render;
+        echo $render;
     }
     
     function addChild($a)
     {
-        if (strtolower(gettype($a) == "array")) {
-            foreach ($a as $b) {
-                if (!($b instanceof DocElement))
-                    continue;
+        $args = func_get_args();
+        if ($args > 1) {
+            foreach ($args as $b) {
+                if (!($b instanceof DocElement)) continue;
                 array_push($this->elements, $b);
             }
             return $this;
