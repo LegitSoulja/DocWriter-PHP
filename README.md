@@ -14,37 +14,34 @@ Something weird, maybe useful. Who knows.
 $tagName = "article";
 $attributes = array("style"=>"color:orange");
 $innerHTML = "YAY, I'm an orange colored element.";
-\DocWriter\DocWriter::createTag($tagName, (array)$attributes, $innerHTML) // returns DocElement object
+DocWriter::createTag($tagName, $attributes, $innerHTML) // returns DocElement object
 
 ```
 
 
 #### \DocWrtier\DocElement as DocElement
 ```php
-/*
-*
-*/
-$element = \DocWriter\DocWriter::createTag("div", array("class"=>"container"));
-
-// You can add a child DocElement, as innerHTML for an element, for example.
-$element->addChild(\DocWriter\DocWriter::createTag("h2",array("style"=>"color:red"),"Hey"));
-
-// Dynamically add an attribute.
-$element->attr("class","hey_text");
-
-// Finally, output results.
-echo $element->toHTML();
+DocWriter::createDoc($html, $head, $body);
+$head->addChild(DocWriter::createTag("title", [], 'DocWriter'));
+$div = DocWriter::createTag('div', ['class'=>'container']);
+$div->addChild(DocWriter::createTag("h2", ['class'=>'hey_text', 'style'=>'color:red'], 'Hey'));
+$body->addChild($div);
+$html->toHTML(true);
 
 /*
-
 Output:
 
-  <div class="container">
-    <h2 class="hey_text" style="color:red">Hey</h2>
-  </div>
+<html lang="en">
+  <head>
+    <title>DocWriter</title>
+  </head>
+  <body>
+    <div class="container">
+      <h2 class="hey_text" style="color:red">Hey</h2>
+    </div>
+  </body>
+</html>
 
 */
-
-
 
 ```
