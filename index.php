@@ -1,24 +1,28 @@
 <?php
-namespace YourSite;
 include 'DocWriter\DocWriter.php';
 
-use DocWriter\DocWriter as DocWriter;
-use DocWriter\DocElement as DocElement;
+use Document;
 
 // Create your page
+DocWriter::createDoc($html, $head, $body);
 
-$html = DocWriter::createTag("html"); // create html tag
-$head = DocWriter::createTag("head"); // create head tag
-$body = DocWriter::createTag("body"); // create body tag
+// Add a title to html
+$html->addChild(DocWriter::createTag("title", [], "DocWriter"));
 
-$html->addChild(array($head,$body)); // add tag head, and body to html
-
-$iframe = DocWriter::createTag("iframe",array( // create test iframe element.
+// Create a new iFrame
+$iframe = DocWriter::createTag("iframe", array(
+    
+    // attributes
     "src"=>"http://youtube.com",
     "style"=>"border:0"
-),"Iframe's are not supported for your browser.");
+    
+    // inside html
+), "Iframes are not supported for your browser.");
 
-$body->addChild($iframe); // add iframe to body
+$p = DocWriter::createTag("p", [], "DocWriter - Alternative to writing html");
 
-// render page
-echo $html->toHTML();
+// add your elements to body
+$body->addChild($iframe, $p); // add iframe to body
+
+// render page. Make sure that you render the parent html, instead of a child of html. 
+$html->toHTML(true);
