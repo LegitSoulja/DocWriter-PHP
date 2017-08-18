@@ -9,14 +9,12 @@ use Document;
 // create new Document (Doc)
 $DOM = new Doc();
 
-// add title to head
-$DOM->head()->addChild("title", [], "DocWriter");
-// You can also add whatever html needed to the inner html.
+// Create title element, add to head
+$DOM->head()->createTag("title", [], "DocWriter");
+// Create/Store element
 $div = DocWriter::createTag("div", ["class"=>"container"], "<b>Div</b>");
-// add div to body
+// Add div to body
 $DOM->body()->addChild($div);
-// Simple way of adding tags without hogging memory
-$DOM->body()->createTag("div");
 // render page
 $DOM->render(true);
 
@@ -25,11 +23,11 @@ $DOM->render(true);
 // Method #2 (Using DocWriter)
 
 
-// Create new document
+// Create new Document
 DocWriter::createDoc($html, $head, $body);
 
 // Add a title to html
-$html->addChild(DocWriter::createTag("title", [], "DocWriter"));
+$html->createTag("title", [], "DocWriter");
 
 // Create a new iFrame
 $iframe = DocWriter::createTag("iframe", array(
