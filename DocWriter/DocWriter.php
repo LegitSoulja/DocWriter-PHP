@@ -2,6 +2,31 @@
 
 namespace Document;
 
+class Doc extends DocWriter {
+    
+    protected $site = [null, null, null];
+    
+    function __construct(){
+        parent::createDoc($this->site[0], $this->site[1], $this->site[2]);
+    }
+    
+    public function render($output = false){
+        if(!$output) return $this->html()->toHTML();
+        echo $this->html()->toHTML();
+    }
+    
+    public function html(){
+        return $this->site[0];
+    }
+    public function head(){
+        return $this->site[1];
+    }
+    public function body(){
+        return $this->site[2];
+    }
+    
+}
+
 class DocWriter
 {
     static function createTag($tagname, $attributes = array(), $innerHTML = null)
@@ -48,6 +73,10 @@ class DocElement
         $render  = "<{$tagname}{$attributes}>{$html}</{$tagname}>" . PHP_EOL;
         if(!$output) return $render;
         echo $render;
+    }
+    
+    public function createTag($tagname, $attributes = array(), $innerHTML = null) {
+        $this->addChild(new DocElement($tagname, $attributes, $innerHTML));
     }
     
     function addChild($a)
