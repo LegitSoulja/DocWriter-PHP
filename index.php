@@ -3,7 +3,29 @@ include 'DocWriter\DocWriter.php';
 
 use Document;
 
-// Create your page
+// Method #1 (Using Doc)
+
+
+// create new Document (Doc)
+$DOM = new Doc();
+
+// add title to head
+$DOM->head()->addChild("title", [], "DocWriter");
+// You can also add whatever html needed to the inner html.
+$div = DocWriter::createTag("div", ["class"=>"container"], "<b>Div</b>");
+// add div to body
+$DOM->body()->addChild($div);
+// Simple way of adding tags without hogging memory
+$DOM->body()->createTag("div");
+// render page
+$DOM->render(true);
+
+
+
+// Method #2 (Using DocWriter)
+
+
+// Create new document
 DocWriter::createDoc($html, $head, $body);
 
 // Add a title to html
