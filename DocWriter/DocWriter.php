@@ -1,6 +1,6 @@
 <?php
 
-namespace Ink\Core\Library;
+namespace Document;
 
 class DocWriter
 {
