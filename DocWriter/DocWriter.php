@@ -30,6 +30,10 @@ class DocElement
         $this->innerHTML  = $c;
     }
     
+    function __destruct(){
+        unset($this->tagname, $this->attributes, $this->innerHTML, $this->elements);
+    }
+    
     function __toString()
     {
         return $this->toHTML();
