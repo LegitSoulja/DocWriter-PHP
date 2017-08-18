@@ -12,7 +12,7 @@ class Doc extends DocWriter {
     
     public function render($output = false){
         if(!$output) return $this->html()->toHTML();
-        echo $this->html()->toHTML();
+        $this->html()->toHTML(true);
     }
     
     public function html(){
