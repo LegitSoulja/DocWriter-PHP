@@ -53,7 +53,7 @@ class DocElement
     function addChild($a)
     {
         $args = func_get_args();
-        if ($args > 1) {
+        if (count($args) > 1) {
             foreach ($args as $b) {
                 if (!($b instanceof DocElement)) continue;
                 array_push($this->elements, $b);
