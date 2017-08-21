@@ -1,27 +1,61 @@
 <?php
 
 namespace Document;
-
 class Doc extends DocWriter {
     
     protected $site = [null, null, null];
     
     function __construct(){
-        parent::createDoc($this->site[0], $this->site[1], $this->site[2]);
+        parent::createDoc($this->site[0],$this->site[1], $this->site[2]);
     }
-    
+
+    private function clean_html($html)
+    {
+        $dom = new \DOMDocument();
+
+        if (libxml_use_internal_errors(true) === true)
+        {
+            libxml_clear_errors();
+        }
+
+        $html = \mb_convert_encoding($html, 'HTML-ENTITIES', 'UTF-8');
+        $html = preg_replace(array('~\R~u', '~>[[:space:]]++<~m'), array("\n", '><'), $html);
+
+        if ((empty($html) !== true) && ($dom->loadHTML($html) === true))
+        {
+            $dom->formatOutput = true;
+
+            if (($html = $dom->saveXML($dom->documentElement, LIBXML_NOEMPTYTAG)) !== false)
+            {
+                $regex = array
+                (
+                    '~' . preg_quote('<![CDATA[', '~') . '~' => '',
+                    '~' . preg_quote(']]>', '~') . '~' => '',
+                    '~></(?:area|base(?:font)?|br|col|command|embed|frame|hr|img|input|keygen|link|meta|param|source|track|wbr)>~' => ' />',
+                );
+
+                return '<!DOCTYPE html>' . "\n" . preg_replace(array_keys($regex), $regex, $html);
+            }
+        }
+
+        return false;
+    }
+
     public function render($output = false){
-        if(!$output) return $this->html()->toHTML();
-        $this->html()->toHTML(true);
+        $html = $this->clean_html($this->html()->toHTML());
+        if(!$output) return $html;
+        echo $html;
     }
     
     public function html(){
         return $this->site[0];
     }
+    
     public function head(){
         return $this->site[1];
     }
-    public function body(){
+    
+    public function body() {
         return $this->site[2];
     }
     
@@ -36,7 +70,7 @@ class DocWriter
     static function createDoc(&$html, &$head, &$body)
     {
         $head = new DocElement("head");
-        $body = new DocElement("body");
+        $body = new DocElement("body", []);
         $html = (new DocElement("html", ["lang"=>"en"]))->addChild($head, $body);
     }
 }
@@ -55,6 +89,12 @@ class DocElement
         $this->innerHTML  = $c;
     }
     
+    public function createTag($tagname, $attributes = array(), $innerHTML = null, &$element = null) {
+        $element = new DocElement($tagname, $attributes, $innerHTML);
+        $this->addChild($element);
+        return $element;
+    }
+    
     function __destruct(){
         unset($this->tagname, $this->attributes, $this->innerHTML, $this->elements);
     }
@@ -64,19 +104,19 @@ class DocElement
         return $this->toHTML();
     }
     
-    function toHTML($output = false)
+    public function appendHTML($a){
+        $this->innerHTML .= $a;
+    }
+    
+    function toHTML($output = false, $ignoreWarning = false)
     {
         $attributes = $this->renderAttributes();
         $html       = $this->innerHTML;
         $html .= $this->renderElements();
         $tagname = $this->tagname;
-        $render  = "<{$tagname}{$attributes}>{$html}</{$tagname}>" . PHP_EOL;
+        $render  = "<{$tagname}{$attributes}>{$html}</{$tagname}>";
         if(!$output) return $render;
         echo $render;
-    }
-    
-    public function createTag($tagname, $attributes = array(), $innerHTML = null) {
-        $this->addChild(new DocElement($tagname, $attributes, $innerHTML));
     }
     
     function addChild($a)
