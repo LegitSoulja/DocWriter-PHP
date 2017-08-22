@@ -44,10 +44,10 @@ DocWriter::createDoc($html, $head, $body);
 $html = DocWriter::createTag("html", ["lang"=>"en"]);
 $head = DocWriter::createTag("head");
 $body = DocWriter::createTag("body");
-*/
 
 // Append head, and body and html
 $html->addChild($head, $body);
+*/
 
 // Add title to head
 $head->createTag("title", [], 'DocWriter');
