@@ -2,7 +2,7 @@
 Something weird, maybe useful. Who knows.
 
 
-#### \DocWriter\DocWriter as DocWriter
+#### \Document\Doc as Doc
 > DocWriter only does one thing. Returns a DocElement object, in which is your element, and element properties. This is how you create your element.
 
 ```php
@@ -22,10 +22,10 @@ $document->render(true); // true will output the html, however false will return
 ```
 
 
-#### \DocWrtier\DocElement as DocElement
+#### \Document\DocWriter as DocWriter
 ```php
 // This was the old way to create a document.
-$html = DocWriter::createTag("html");
+$html = DocWriter::createTag("html", ["lang"=>"en"]);
 $head = DocWriter::createTag("head");
 $body = DocWriter::createTag("body");
 
@@ -44,9 +44,11 @@ $div->createTag("h2", ['class'=>'hey_text', 'style'=>'color:red'], 'Hey');
 // Render document (html). Html is the parent of your document, in which will render everything.
 $html->toHTML(true);
 
-/*
-Output:
+```
 
+> Output
+
+```html
 <html lang="en">
   <head>
     <title>DocWriter</title>
@@ -57,7 +59,4 @@ Output:
     </div>
   </body>
 </html>
-
-*/
-
 ```
