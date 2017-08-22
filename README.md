@@ -3,7 +3,8 @@ Something weird, maybe useful. Who knows.
 
 
 #### \Document\Doc as Doc
-> DocWriter only does one thing. Returns a DocElement object, in which is your element, and element properties. This is how you create your element.
+
+DocWriter only does one thing. Returns a DocElement object, in which is your element, and element properties. This is how you create your element.
 
 ```php
 use Document;
