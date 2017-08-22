@@ -38,10 +38,13 @@ $document->render(true); // true will output the html, however false will return
 
 #### \Document\DocWriter as DocWriter
 ```php
-// This was the old way to create a document.
+DocWriter::createDoc($html, $head, $body);
+
+/* This was the old way to create a document.
 $html = DocWriter::createTag("html", ["lang"=>"en"]);
 $head = DocWriter::createTag("head");
 $body = DocWriter::createTag("body");
+*/
 
 // Append head, and body and html
 $html->addChild($head, $body);
