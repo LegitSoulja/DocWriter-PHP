@@ -55,7 +55,7 @@ class Doc extends DocWriter {
 
     /*
     \| Render/Output HTML
-    \| @output bool True to output HTML, false to return string
+    \| @param bool $output | True to output HTML, false to return string
     \| @return string
     */
     public function render($output = false){
@@ -95,9 +95,9 @@ class DocWriter
     
     /*
     \| Create tag
-    \| @param string $tagname The tagname of your element
-    \| @param array $attributes The attributes of your element
-    \| @param string $innerHTML The innerHTML content of your element
+    \| @param string $tagname | The tagname of your element
+    \| @param array $attributes | The attributes of your element
+    \| @param string $innerHTML | The innerHTML content of your element
     \| @return DocElement
     */
     static function createTag($tagname, $attributes = array(), $innerHTML = null)
@@ -107,9 +107,9 @@ class DocWriter
     
     /*
     \| Create document
-    \| @param string $html Variable Reference
-    \| @param string $head Variable Reference
-    \| @param string $body Variable Reference
+    \| @param string $html | Variable Reference
+    \| @param string $head | Variable Reference
+    \| @param string $body | Variable Reference
     \| @return $html, $head, $hody
     */
     static function createDoc(&$html, &$head, &$body)
@@ -124,22 +124,22 @@ class DocElement
 {
     
     /*
-    \| $var string | Element Tag Name
+    \| @var string | Element Tag Name
     */
     private $tagname;
     
     /*
-    \| $var array | Element attributes
+    \| @var array | Element attributes
     */
     private $attributes;
     
     /*
-    \| $var string | Element inner HTML
+    \| @var string | Element inner HTML
     */
     private $innerHTML;
     
     /*
-    \| $var array | Child elements of this element
+    \| @var array | Child elements of this element
     */
     private $elements = array();
     
