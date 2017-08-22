@@ -21,9 +21,10 @@ $document->body()->createTag("p", [], "Welcome!. DocWriter just generated this p
 $document->render(true); // true will output the html, however false will return the html string
 ```
 
-> Output
+> Output (All HTML code is cleaned before outputted, leaving you with a clean page source)
 
 ```html
+<!DOCTYPE html>
 <html>
   <head>
     <title>DocWriter-PHP</title>
@@ -58,7 +59,7 @@ $html->toHTML(true);
 
 ```
 
-> Output
+> Output (All HTML code is cleaned before outputted, leaving you with a clean page source)
 
 ```html
 <html lang="en">
