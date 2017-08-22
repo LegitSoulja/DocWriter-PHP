@@ -25,9 +25,9 @@ $document->render(true); // true will output the html, however false will return
 #### \DocWrtier\DocElement as DocElement
 ```php
 // This was the old way to create a document.
-$html = DocWriter::createDoc("html");
-$head = DocWriter::createDoc("head");
-$body = DocWriter::createDoc("body");
+$html = DocWriter::createTag("html");
+$head = DocWriter::createTag("head");
+$body = DocWriter::createTag("body");
 
 // Append head, and body and html
 $html->addChild($head, $body);
