@@ -21,6 +21,18 @@ $document->body()->createTag("p", [], "Welcome!. DocWriter just generated this p
 $document->render(true); // true will output the html, however false will return the html string
 ```
 
+> Output
+
+```html
+<html>
+  <head>
+    <title>DocWriter-PHP</title>
+  </head>
+  <body>
+    <p>Welcome!. DocWriter just generated this page with ease.</p>
+  </body>
+</html>
+```
 
 #### \Document\DocWriter as DocWriter
 ```php
