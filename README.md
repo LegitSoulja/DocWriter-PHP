@@ -1,6 +1,7 @@
 # DocWriter-PHP
 Something weird, maybe useful. Who knows.
 
+> Docs: https://legitsoulja.github.io/DocWriter-PHP/
 
 #### \Document\Doc as Doc
 
